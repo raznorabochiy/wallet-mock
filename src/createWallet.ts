@@ -73,12 +73,14 @@ export function createWallet(
 
       if (method === "eth_sendTransaction") {
         const from = (params?.[0] as any).from;
-        if (from !== account.address) throw new Error("Invalid from address");
+        if (from.toLowerCase() !== account.address.toLowerCase()) {
+          throw new Error("Invalid from address");
+        }
 
         return await client.sendTransaction({
           to: (params?.[0] as any).to,
           data: (params?.[0] as any).data,
-          value: (params?.[0] as any).value,
+          value: BigInt((params?.[0] as any).value),
           // Let viem handle the gas calcutation
           // gas: (params?.[0] as any).gas ?? (params?.[0] as any).gasLimit,
           // gasPrice: (params?.[0] as any).gasPrice,
