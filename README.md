@@ -7,7 +7,7 @@ Fully functional end-to-end (E2E) tests for your decentralized application (dApp
 - All wallet actions are pre-approved by default, eliminating the need for user interaction
 - All wallet interactions are headless, meaning, no user interaction is required. You should be testing your dApp, not the wallet
 
-## Quickstart
+## Quick start
 ### Install
 ```shell
 npm install -D @raznorabochiy/wallet-mock
