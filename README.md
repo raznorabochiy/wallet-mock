@@ -49,7 +49,7 @@ test("Your Test", async ({ page }) => {
 ### Uniswap Demo
 The Mock Wallet will show up as an EIP-6963 compatible wallet.
 
-<img width="500" alt="Screenshot Uniswap" src="https://github.com/raznorabochiy/wallet-mock/assets/1416628/b3d31df0-6273-42da-b00f-63bc8294a592">
+<img width="500" alt="Screenshot Uniswap" src="https://github.com/johanneskares/wallet-mock/assets/1416628/b3d31df0-6273-42da-b00f-63bc8294a592">
 
 ## Mocking
 Here's a simple example of how to mock a specific function while using regular RPC calls for all other functions:
