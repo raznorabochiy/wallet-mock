@@ -1,11 +1,11 @@
 import {
-  LocalAccount,
-  Hex,
-  Transport,
+  type Chain,
   createWalletClient,
   fromHex,
-  type Chain,
+  Hex,
   http,
+  LocalAccount,
+  Transport,
 } from "viem";
 import * as chains from "viem/chains";
 
@@ -80,7 +80,7 @@ export function createWallet(
         return await client.sendTransaction({
           to: (params?.[0] as any).to,
           data: (params?.[0] as any).data,
-          value: BigInt((params?.[0] as any).value),
+          value: BigInt((params?.[0] as any).value ?? 0),
           // Let viem handle the gas calcutation
           // gas: (params?.[0] as any).gas ?? (params?.[0] as any).gasLimit,
           // gasPrice: (params?.[0] as any).gasPrice,
