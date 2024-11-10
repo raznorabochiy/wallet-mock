@@ -10,15 +10,15 @@ Fully functional end-to-end (E2E) tests for your decentralized application (dApp
 ## Quickstart
 ### Install
 ```shell
-npm install -D @johanneskares/wallet-mock
+npm install -D @raznorabochiy/wallet-mock
 ```
 ### Example
 ```ts
 import { test } from "@playwright/test";
-import { installMockWallet } from "@johanneskares/wallet-mock";
+import { installMockWallet } from "@raznorabochiy/wallet-mock";
 import { privateKeyToAccount } from "viem/accounts";
 import { http } from "viem";
-import { sepolia } from "viem/chains";
+import { mainnet } from "viem/chains";
 
 test.beforeEach(async ({ page }) => {
   await installMockWallet({
@@ -26,8 +26,15 @@ test.beforeEach(async ({ page }) => {
     account: privateKeyToAccount(
       "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80",
     ),
-    defaultChain: sepolia,
-    transports: { [sepolia.id]: http() },
+    defaultChain: {
+      ...mainnet,
+      rpcUrls: {
+        default: {
+          http: ["https://eth-mainnet.public.blastapi.io"],
+        },
+      },
+    },
+    transports: { [mainnet.id]: http() },
   });
 });
 
@@ -42,7 +49,7 @@ test("Your Test", async ({ page }) => {
 ### Uniswap Demo
 The Mock Wallet will show up as an EIP-6963 compatible wallet.
 
-<img width="500" alt="Screenshot Uniswap" src="https://github.com/johanneskares/wallet-mock/assets/1416628/b3d31df0-6273-42da-b00f-63bc8294a592">
+<img width="500" alt="Screenshot Uniswap" src="https://github.com/raznorabochiy/wallet-mock/assets/1416628/b3d31df0-6273-42da-b00f-63bc8294a592">
 
 ## Mocking
 Here's a simple example of how to mock a specific function while using regular RPC calls for all other functions:
