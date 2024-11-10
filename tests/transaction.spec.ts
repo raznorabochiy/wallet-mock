@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { installMockWallet } from "./../src/installMockWallet";
 import { privateKeyToAccount } from "viem/accounts";
-import { custom, http, isHex } from "viem";
+import { isHex } from "viem";
 import { sepolia } from "viem/chains";
 
 test.beforeEach(async ({ page }) => {
@@ -18,17 +18,16 @@ test.beforeEach(async ({ page }) => {
 test("Metamask Wallet Test Dapp", async ({ page }) => {
   const baseUrl = "https://metamask.github.io/test-dapp/";
   await page.goto(baseUrl);
-  await page.getByRole("button", { name: "USE MOCK WALLET" }).click();
+  await page.getByRole("button", { name: "USE METAMASK" }).click();
 
   await expect(
     page.getByRole("heading", { name: "Active Provider" }),
   ).toBeVisible();
-  await expect(page.getByText("Name: Mock Wallet")).toBeVisible();
+  await expect(page.getByText("Name: MetaMask")).toBeVisible();
 
   await page.locator("#personalSign").click();
-  await expect(
-    page.getByText(
-      "0x7ac0fa03981bf136329ffaa21aed4f0ac7fa9a4837e966f16c5bf8783be7e43f41afe27bc4fb75",
-    ),
-  ).toBeVisible();
+
+  expect(await page.locator("#personalSignResult").innerText()).toEqual(
+    "0xf95b3efc808585303e20573e960993cde30c7f5a0f1c25cfab0379d5a14311d17898199814c8ebe66ec80b2b11690f840bde539f862ff4f04468d2a40f15178a1b",
+  );
 });
